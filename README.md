@@ -12,7 +12,3 @@ Features:
     - Add a new post
 
 ------------------------------
-
-=======
-# chirp
->>>>>>> 2794feba3cca3f74f1e2535271ac3901f432dd7f
