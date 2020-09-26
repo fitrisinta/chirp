@@ -1,0 +1,15 @@
+<div class="main posts-index">
+  <div class="container">
+
+    <!-- Show every posts -->
+    <% @posts.each do |post| %> 
+
+      <div class="posts-index-item">
+        <!-- Redirect to the post details page -->
+        <%= link_to(post.content, "/posts/#{post.id}") %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
