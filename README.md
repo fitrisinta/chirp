@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # README
 
 Chirp is a social network service for digital nomads.
