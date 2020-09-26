@@ -1,24 +1,18 @@
+<<<<<<< HEAD
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Chirp is a social network service for digital nomads.
 
-Things you may want to cover:
+Features:
+1. Home page
+2. About page
+3. Posts page: 
+    - Show all posts
+    - Post details page
+    - Add a new post
 
-* Ruby version
+------------------------------
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+=======
+# chirp
+>>>>>>> 2794feba3cca3f74f1e2535271ac3901f432dd7f
