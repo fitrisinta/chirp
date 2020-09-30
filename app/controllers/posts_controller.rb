@@ -11,14 +11,19 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
     # Create a post with the data sent from the form
     @post = Post.new(content: params[:content])
-    @post.save
+    # Redirect to the "Posts" page if the @post is valid, and render the "New post" page if it isn't
+    if @post.save
     # Use the redirect_to method to redirect to the "Posts" page
-    redirect_to("/posts/index")
+      redirect_to("/posts/index")
+    else 
+      render("posts/new")
+    end
   end
 
   def edit
@@ -29,8 +34,14 @@ class PostsController < ApplicationController
     # Update the post with the data sent from the form
     @post = Post.find_by(id: params[:id])
     @post.content = params[:content]
-    @post.save
-    redirect_to("/posts/index")
+    if @post.save
+       # Store the message in flash[:notice]
+       flash[:notice] = "Post successfully edited"
+       redirect_to("/posts/index")
+    else
+       # Use the render method to show the "Edit post" page without redirecting to the "edit" action
+       render("posts/edit")
+    end
   end
 
   def destroy
