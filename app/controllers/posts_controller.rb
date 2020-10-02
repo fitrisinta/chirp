@@ -5,8 +5,8 @@ class PostsController < ApplicationController
     @posts = Post.all.order(created_at: :desc) 
   end
 
-  #shows the post
   def show
+    #Finds and shows the post
     @post = Post.find_by(id: params[:id])
   end
 
@@ -19,7 +19,9 @@ class PostsController < ApplicationController
     @post = Post.new(content: params[:content])
     # Redirect to the "Posts" page if the @post is valid, and render the "New post" page if it isn't
     if @post.save
-    # Use the redirect_to method to redirect to the "Posts" page
+      # Store the message in flash[:notice]
+      flash[:notice] = "Post successfully created"
+      # Use the redirect_to method to redirect to the "Posts" page
       redirect_to("/posts/index")
     else 
       render("posts/new")
@@ -48,6 +50,8 @@ class PostsController < ApplicationController
      # Get the post with params[:id] as the id, then destroy it
     @post = Post.find_by(id: params[:id])
     @post.destroy
+    # Store the message in flash[:notice]
+    flash[:notice] =  # Store the message in flash[:notice]
     redirect_to("posts/index")
   end
 end
