@@ -11,9 +11,11 @@
         <% end %>
 
         <!-- Add a form_tag method to send the data to the "update" action -->
-        <%= form_tag("/users/#{@user.id}/update") do %>
+        <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
             <p>Name</p>
             <input name="name" value="<%= @user.name %>">
+            <p>Image</p>
+            <input type="file" name="image">
             <p>Email</p>
             <input name="email" value="<%= @user.email %>">
             <input type="submit" value="Save">
