@@ -1,0 +1,28 @@
+<div class="main users-new">
+  <div class="container">
+    <div class="form-heading">Sign up</div>
+    <div class="form users-form">
+      <div class="form-body">
+
+        <!-- Display the error messages -->
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>  
+
+        <!-- Add a form_tag method to send the data to the "create" action -->
+        <%= form_tag("/users/create") do %> 
+            <p>Name</p>
+            <input name="name" value="<%= @user.name %>">
+        
+            <p>Email</p>
+            <input name="email" value="<%= @user.email%>">
+        
+            <input type="submit" value="Sign up">
+       <% end %>
+      
+      </div>
+    </div>
+  </div>
+</div>
