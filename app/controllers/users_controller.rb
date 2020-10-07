@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
+
   def index
     @users = User.all
   end
@@ -17,9 +20,11 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
-      image_name: "default_user.jpg"
+      image_name: "default_user.jpg",
+      password: params[:password]
     )
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "You have signed up successfully"
       redirect_to("/users/#{@user.id}")
     else
@@ -46,6 +51,39 @@ class UsersController < ApplicationController
       redirect_to("/users/#{@user.id}")
     else
       render("users/edit")
+    end
+  end
+
+  def login_form
+  end
+
+  def login
+    # Get the user with the email and the password, then assign it to the @user variable
+    @user = User.find_by(email: params[:email], password: params[:password])
+    # Redirect to the "Posts" page if the @user exists, and render the "Login Form" page if it isn't
+    if @user
+      # Store the id of the user in session[:user_id]
+      session[:user_id] = @user.id
+      flash[:notice] = "You have logged in successfully"
+      redirect_to("/posts/index")
+    else
+      @error_message = "Invalid email/password combination"
+      @email = params[:email]
+      @password = params[:password]
+      render("users/login_form")
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = "You have logged out successfully"
+    redirect_to("/login")
+  end
+
+  def ensure_correct_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice] = "Unauthorized access"
+      redirect_to("/posts/index")
     end
   end
 
